@@ -1,4 +1,4 @@
-import 'package:easy_scroll_pagination/easy_pagination.dart';
+import 'package:easy_scroll_pagination/easy_scroll_pagination.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
