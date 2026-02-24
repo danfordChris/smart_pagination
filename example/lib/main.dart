@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:easy_scroll_pagination/easy_scroll_pagination.dart';
+import 'package:easy_scroll_pagination/easy_pagination.dart';
 import 'package:flutter/material.dart';
 
 void main() {
