@@ -2,8 +2,11 @@ import 'pagination_controller.dart';
 import 'pagination_state.dart';
 import 'pagination_status.dart';
 
+/// Offset pagination controller that fetches multiple sources in parallel.
 class ParallelOffsetPaginationController<T> extends PaginationController<T> {
+  /// Fetchers to run in parallel. Each maintains its own page counter.
   final List<Future<List<T>> Function(int page, int limit)> fetchers;
+  /// Page size used for each fetcher.
   final int limit;
 
   /// Track the current page of each fetcher independently

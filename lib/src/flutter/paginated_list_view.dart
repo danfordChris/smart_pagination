@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_pagination/src/core/pagination_controller.dart';
 
+/// A ready-to-use infinite list widget powered by a [PaginationController].
 class PaginatedListView<T> extends StatefulWidget {
   final PaginationController<T> controller;
   final Widget Function(BuildContext, T, int) itemBuilder;

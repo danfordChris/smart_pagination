@@ -1,12 +1,13 @@
 import 'pagination_status.dart';
 
+/// Immutable pagination state container.
 class PaginationState<T> {
   final List<T> items;
   final PaginationStatus status;
   final bool hasMore;
   final String? errorMessage;
 
-  /// For cursor-based pagination
+  /// For cursor-based pagination.
   final String? nextCursor;
 
   const PaginationState({this.items = const [], this.status = PaginationStatus.initial, this.hasMore = true, this.errorMessage, this.nextCursor});
@@ -28,9 +29,12 @@ class PaginationState<T> {
     );
   }
 
+  /// True when loading for the first time.
   bool get isInitialLoading => status == PaginationStatus.loading && items.isEmpty;
 
+  /// True when a failure occurred before any items loaded.
   bool get hasError => status == PaginationStatus.failure && items.isEmpty;
 
+  /// True when success was returned but no items exist.
   bool get isEmpty => status == PaginationStatus.success && items.isEmpty;
 }

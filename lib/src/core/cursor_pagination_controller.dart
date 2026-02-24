@@ -2,6 +2,7 @@ import 'pagination_controller.dart';
 import 'pagination_state.dart';
 import 'pagination_status.dart';
 
+/// Result model for cursor-based pagination.
 class CursorResult<T> {
   final List<T> items;
   final String? nextCursor;
@@ -10,7 +11,9 @@ class CursorResult<T> {
   CursorResult({required this.items, required this.nextCursor, required this.hasMore});
 }
 
+/// Cursor-based pagination controller.
 class CursorPaginationController<T> extends PaginationController<T> {
+  /// Fetcher signature for cursor-based pagination.
   final Future<CursorResult<T>> Function(String? cursor) fetcher;
 
   String? _cursor;

@@ -2,8 +2,11 @@ import 'pagination_controller.dart';
 import 'pagination_state.dart';
 import 'pagination_status.dart';
 
+/// Offset-based pagination controller (page + limit).
 class OffsetPaginationController<T> extends PaginationController<T> {
+  /// Fetcher signature for offset-based pagination.
   final Future<List<T>> Function(int page, int limit) fetcher;
+  /// Page size used for each fetch.
   final int limit;
   int _page = 1;
 
