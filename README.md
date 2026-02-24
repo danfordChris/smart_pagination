@@ -1,12 +1,15 @@
-# smart_pagination
+# easy_scroll_pagination
 
 Lightweight pagination controllers and a Flutter list widget for offset, cursor, and parallel pagination. The core controllers are framework-agnostic (ChangeNotifier-based) and easy to integrate with Provider, Riverpod, or Bloc.
 
 ## Features
+- Flexible layouts: ListView, GridView, PageView, Column, Row, and Custom
 - Offset pagination (page + limit)
 - Cursor pagination (nextCursor)
 - Parallel offset pagination (merge multiple sources in one list)
 - Infinite scroll widget with pull-to-refresh
+- Configurable scroll threshold
+- Custom widgets for loading, error, and empty states
 - Prevents duplicate fetches
 - Safe disposal handling
 - Clear pagination state model
@@ -16,7 +19,7 @@ Add to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  smart_pagination: ^1.0.0
+  easy_scroll_pagination: ^1.0.0
 ```
 
 Then run:
@@ -54,10 +57,10 @@ final usersController = OffsetPaginationController<User>(
 );
 ```
 
-UI:
+UI (Standard List):
 
 ```dart
-PaginatedListView<User>(
+PaginatedView<User>.list(
   controller: usersController,
   itemBuilder: (context, user, index) {
     return ListTile(
@@ -65,6 +68,58 @@ PaginatedListView<User>(
       subtitle: Text(user.email),
     );
   },
+)
+```
+
+### Grid, PageView, and Custom Layouts
+`PaginatedView` supports various layouts out of the box.
+
+#### GridView
+```dart
+PaginatedView<User>.grid(
+  controller: controller,
+  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+  itemBuilder: (context, user, index) => Card(child: Text(user.name)),
+)
+```
+
+#### PageView
+```dart
+PaginatedView<User>.page(
+  controller: controller,
+  itemBuilder: (context, user, index) => Center(child: Text(user.name)),
+)
+```
+
+#### Column/Row (Custom Layouts)
+Use `.layout()` when you need to use non-scrollable widgets like `Column` or `Row` inside a `SingleChildScrollView`, or other custom layouts like `StaggeredGrid`.
+
+```dart
+SingleChildScrollView(
+  controller: myScrollController,
+  child: PaginatedView<User>.layout(
+    controller: controller,
+    scrollController: myScrollController,
+    itemBuilder: (context, user, index) => ListTile(title: Text(user.name)),
+    layoutBuilder: (children) => Column(children: children),
+  ),
+)
+```
+
+### Custom Loading and Error UI
+You can customize the look of various states:
+
+```dart
+PaginatedView<User>.list(
+  controller: controller,
+  itemBuilder: itemBuilder,
+  onInitialLoading: CircularProgressIndicator(),
+  onLoadingMore: Padding(
+    padding: EdgeInsets.all(8.0),
+    child: Center(child: CircularProgressIndicator()),
+  ),
+  onError: (error) => Text('Error: $error'),
+  onEmpty: Text('No items found'),
 )
 ```
 
@@ -103,10 +158,10 @@ final postsController = CursorPaginationController<Post>(
 );
 ```
 
-UI:
+UI (Standard List):
 
 ```dart
-PaginatedListView<Post>(
+PaginatedView<Post>.list(
   controller: postsController,
   itemBuilder: (context, post, index) {
     return ListTile(
@@ -195,7 +250,7 @@ Consumer<UsersController>(
 
 ```
 lib/
-  smart_pagination.dart
+  easy_scroll_pagination.dart
   src/
     core/
       pagination_controller.dart
@@ -205,6 +260,7 @@ lib/
       pagination_state.dart
       pagination_status.dart
     flutter/
+      paginated_view.dart
       paginated_list_view.dart
 ```
 

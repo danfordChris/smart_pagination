@@ -1,20 +1,20 @@
-name: smart_pagination
+name: easy_scroll_pagination_example
 description: A flexible Flutter pagination controller supporting offset and cursor-based pagination with refresh, parallel API calls, and clean state management.
 
-homepage: https://github.com/danfordChris/smart_pagination
-repository: https://github.com/danfordChris/smart_pagination.git
-issue_tracker: https://github.com/danfordChris/smart_pagination/issues
+homepage: https://github.com/danfordChris/easy_scroll_pagination
+repository: https://github.com/danfordChris/easy_scroll_pagination.git
+issue_tracker: https://github.com/danfordChris/easy_scroll_pagination/issues
 
 version: 1.0.0
 publish_to: 'none'
 
 environment:
-  sdk: ^3.9.2
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  smart_pagination:
+  easy_scroll_pagination:
     path: ..
 
 dev_dependencies:
