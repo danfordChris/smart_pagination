@@ -1,0 +1,26 @@
+name: smart_pagination
+description: A flexible Flutter pagination controller supporting offset and cursor-based pagination with refresh, parallel API calls, and clean state management.
+
+homepage: https://github.com/danfordChris/smart_pagination
+repository: https://github.com/danfordChris/smart_pagination.git
+issue_tracker: https://github.com/danfordChris/smart_pagination/issues
+
+version: 1.0.0
+publish_to: 'none'
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  smart_pagination:
+    path: ..
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
